@@ -202,7 +202,7 @@ fun LoginScreen(
                 text = "Sign Up",
                 color = purple1,
                 fontWeight = FontWeight.Bold,
-                modifier = Modifier.clickable { onSignUpClick() }
+                modifier = Modifier.clickable { onSignUpClick() },
             )
         }
 

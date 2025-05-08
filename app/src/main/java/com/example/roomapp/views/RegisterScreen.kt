@@ -23,9 +23,7 @@ import com.example.roomapp.R
 
 @Composable
 fun RegisterScreen(
-    onLoginSuccess: () -> Unit = {},
-    onSignUpClick: () -> Unit = {},
-    onForgotPasswordClick: () -> Unit = {}
+    onSignInClick: () -> Unit = {}
 ) {
     val purple1 = Color(0xff471AA0)
     val purple2 = Color(0xFFBB84E8)
@@ -41,18 +39,8 @@ fun RegisterScreen(
     ) {
         Spacer(modifier = Modifier.height(62.dp))
 
-        Image(
-            painter = painterResource(id = R.drawable.logo),
-            contentDescription = "Logo",
-            modifier = Modifier
-                .width(120.dp)
-                .height(120.dp)
-        )
-
-        Spacer(modifier = Modifier.height(21.dp))
-
         Text(
-            text = "Sign In",
+            text = "Sign Up",
             color = purple1,
             fontSize = 30.sp,
             fontWeight = FontWeight.Bold,
@@ -142,18 +130,14 @@ fun RegisterScreen(
                 text = "Forget password?",
                 color = purple1,
                 fontWeight = FontWeight.SemiBold,
-                modifier = Modifier.clickable { onForgotPasswordClick() }
+                modifier = Modifier.clickable { /* no action */ }
             )
         }
 
         Spacer(modifier = Modifier.height(40.dp))
 
         Button(
-            onClick = {
-                if (email == "dsw@gmail.com" && password == "password") {
-                    onLoginSuccess()
-                }
-            },
+            onClick = { /* no action */ },
             colors = ButtonDefaults.buttonColors(containerColor = purple2),
             shape = RoundedCornerShape(16.dp),
             modifier = Modifier
@@ -178,7 +162,7 @@ fun RegisterScreen(
         Spacer(modifier = Modifier.height(24.dp))
 
         Button(
-            onClick = { /* handle google sign-in */ },
+            onClick = { /* no action */ },
             shape = CircleShape,
             colors = ButtonDefaults.buttonColors(containerColor = Color.White),
             modifier = Modifier.size(50.dp),
@@ -196,13 +180,13 @@ fun RegisterScreen(
         Spacer(modifier = Modifier.height(50.dp))
 
         Row {
-            Text(text = "Don't have an account?", color = purple1)
+            Text(text = "Already have an account?", color = purple1)
             Spacer(modifier = Modifier.width(4.dp))
             Text(
-                text = "Sign Up",
+                text = "Sign in",
                 color = purple1,
                 fontWeight = FontWeight.Bold,
-                modifier = Modifier.clickable { onSignUpClick() }
+                modifier = Modifier.clickable { onSignInClick() }
             )
         }
 
