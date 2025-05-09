@@ -32,6 +32,7 @@ fun LoginScreen(
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
+    var errorMessage by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier
@@ -130,6 +131,17 @@ fun LoginScreen(
             modifier = Modifier.fillMaxWidth()
         )
 
+        if (errorMessage.isNotEmpty()) {
+            Text(
+                text = errorMessage,
+                color = Color.Red,
+                fontSize = 14.sp,
+                modifier = Modifier
+                    .padding(top = 8.dp)
+                    .align(Alignment.Start)
+            )
+        }
+
         Spacer(modifier = Modifier.height(40.dp))
 
         Row(
@@ -151,7 +163,10 @@ fun LoginScreen(
         Button(
             onClick = {
                 if (email == "dsw@gmail.com" && password == "password") {
+                    errorMessage = ""
                     onLoginSuccess()
+                } else {
+                    errorMessage = "Invalid email or password"
                 }
             },
             colors = ButtonDefaults.buttonColors(containerColor = purple2),

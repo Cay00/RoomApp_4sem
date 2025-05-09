@@ -51,27 +51,19 @@ android {
 }
 
 dependencies {
-    // Firebase Authentication
     implementation("com.google.firebase:firebase-auth-ktx:22.3.1")
-
-    // Navigation Compose
     implementation("androidx.navigation:navigation-compose:2.7.6")
     implementation(libs.runtime.livedata)
-
-    // Room Database
     val room_version = "2.6.1"
+    implementation("androidx.preference:preference-ktx:1.2.1")
     implementation("androidx.room:room-runtime:$room_version")
     kapt("androidx.room:room-compiler:$room_version")
-
-    // Compose dependencies
     implementation(platform("androidx.compose:compose-bom:2023.05.01"))
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.material3:material3")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx")
     implementation("androidx.activity:activity-compose")
-
-    // Testing
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.espresso:espresso-core:3.5.1")

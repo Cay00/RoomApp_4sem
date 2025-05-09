@@ -114,7 +114,6 @@ fun TodoListPage(
     }
 }
 
-
 @Composable
 fun TodoItem(item: Todo, onDelete: () -> Unit) {
     Row(
