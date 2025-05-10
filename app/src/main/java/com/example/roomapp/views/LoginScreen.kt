@@ -1,5 +1,6 @@
 package com.example.roomapp.views
 
+import androidx.activity.ComponentActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -14,6 +15,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.*
@@ -33,6 +35,7 @@ fun LoginScreen(
     var password by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
     var errorMessage by remember { mutableStateOf("") }
+    val context = LocalContext.current
 
     Column(
         modifier = Modifier
@@ -164,6 +167,14 @@ fun LoginScreen(
             onClick = {
                 if (email == "dsw@gmail.com" && password == "password") {
                     errorMessage = ""
+
+                    // ZAPIS DO SHARED PREFERENCES
+                    val sharedPref = context.getSharedPreferences("user_prefs", ComponentActivity.MODE_PRIVATE)
+                    with(sharedPref.edit()) {
+                        putBoolean("is_logged_in", true)
+                        apply()
+                    }
+
                     onLoginSuccess()
                 } else {
                     errorMessage = "Invalid email or password"
@@ -183,32 +194,6 @@ fun LoginScreen(
         }
 
         Spacer(modifier = Modifier.height(75.dp))
-
-        Text(
-            text = "Or sign in With",
-            color = purple1,
-            fontSize = 15.sp
-        )
-
-        Spacer(modifier = Modifier.height(24.dp))
-
-        Button(
-            onClick = { /* handle google sign-in */ },
-            shape = CircleShape,
-            colors = ButtonDefaults.buttonColors(containerColor = Color.White),
-            modifier = Modifier.size(50.dp),
-            elevation = ButtonDefaults.buttonElevation(defaultElevation = 4.dp)
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.logo_google),
-                contentDescription = "Google",
-                modifier = Modifier
-                    .width(140.dp)
-                    .height(240.dp)
-            )
-        }
-
-        Spacer(modifier = Modifier.height(50.dp))
 
         Row {
             Text(text = "Don't have an account?", color = purple1)

@@ -39,7 +39,7 @@ fun RegisterScreen(
             .padding(horizontal = 24.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Spacer(modifier = Modifier.height(180.dp))
+        Spacer(modifier = Modifier.height(100.dp))
 
         Text(
             text = "Sign Up",

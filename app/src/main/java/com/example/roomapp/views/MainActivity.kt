@@ -20,15 +20,19 @@ class MainActivity : ComponentActivity() {
 
         val todoViewModel = ViewModelProvider(this)[TodoViewModel::class.java]
 
+        val sharedPref = getSharedPreferences("user_prefs", MODE_PRIVATE)
+        val isLoggedIn = sharedPref.getBoolean("is_logged_in", false)
+        val initialRoute = if (isLoggedIn) "todo" else "login"
+
         setContent {
-            TodoAppTheme {
+            TodoAppTheme(darkTheme = false) {
                 val navController = rememberNavController()
 
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    NavHost(navController = navController, startDestination = "login") {
+                    NavHost(navController = navController, startDestination = initialRoute) {
 
                         composable("login") {
                             LoginScreen(
@@ -51,6 +55,10 @@ class MainActivity : ComponentActivity() {
                             TodoListPage(
                                 viewModel = todoViewModel,
                                 onLogout = {
+                                    with(sharedPref.edit()) {
+                                        clear()
+                                        apply()
+                                    }
                                     navController.navigate("login") {
                                         popUpTo("todo") { inclusive = true }
                                     }
